@@ -1,0 +1,30 @@
+type Book {
+    id: ID!,
+    name: String,
+    author: String,
+    status: String
+}
+
+input BookCreateInput {
+    name: String,
+    author: String,
+    status: String
+}
+
+input BookInput {
+    id: ID!,
+    name: String,
+    author: String,
+    status: String
+}
+
+type Query {
+    readAllBooks:[Book],
+    readBookById(id: ID):Book!,
+}
+
+type Mutation {
+    createBook(bookDTO: BookCreateInput!):Book
+    updateBook(book: BookInput):Book
+    deleteBook(id: ID!):String
+}
