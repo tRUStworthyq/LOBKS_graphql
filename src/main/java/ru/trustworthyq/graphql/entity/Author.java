@@ -8,18 +8,18 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "books")
+@Document(collection = "authors")
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Data
-public class Book {
+@Builder
+public class Author {
 
     @Transient
-    public static final String SEQUENCE_NAME = "book_sequence";
+    public static final String SEQUENCE_NAME = "author_sequence";
+
     @Id
     private Long id;
-    private String name;
-    private String status;
-    private Author author;
+    private String firstname;
+    private String lastname;
 }

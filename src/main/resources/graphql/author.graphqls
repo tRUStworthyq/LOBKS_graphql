@@ -1,30 +1,24 @@
-type Book {
-    id: ID!,
-    name: String,
-    author: String,
-    status: String
+type Author {
+    id: ID!
+    firstname: String!
+    lastname: String!
 }
 
-input BookCreateInput {
-    name: String,
-    author: String,
-    status: String
+input AuthorCreateInput {
+    firstname: String!
+    lastname: String!
 }
 
-input BookInput {
-    id: ID!,
-    name: String,
-    author: String,
-    status: String
+input AuthorInput {
+    id: ID!
+    firstname: String!
+    lastname: String!
 }
 
-type Query {
-    readAllBooks:[Book],
-    readBookById(id: ID):Book!,
+extend type Query {
+    readAuthorByFirstname(firstname: String!):Author!
 }
 
-type Mutation {
-    createBook(bookDTO: BookCreateInput!):Book
-    updateBook(book: BookInput):Book
-    deleteBook(id: ID!):String
+extend type Mutation {
+    createAuthor(authorDTO: AuthorCreateInput!):Author!
 }
