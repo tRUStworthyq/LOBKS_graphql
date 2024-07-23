@@ -7,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.graphql.tester.AutoConfigureG
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.graphql.test.tester.GraphQlTester;
 import ru.trustworthyq.graphql.entity.Author;
+import ru.trustworthyq.graphql.entity.Book;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureGraphQlTester
@@ -30,12 +31,27 @@ class AuthorTestsGraphql {
                 .entity(Author.class)
                 .get();
         Assertions.assertNotNull(author);
-        Assertions.assertEquals(author.getFirstname(), "111");
-        Assertions.assertEquals(author.getLastname(), "222");
+        Assertions.assertEquals("111", author.getFirstname());
+        Assertions.assertEquals("222", author.getLastname());
     }
     @Test
     void readAuthorByFirstname() {
-
+        String query = "query {\n" +
+                "  readAuthorByFirstname (firstname: \"Maxim\") {\n" +
+                "      id\n" +
+                "      firstname\n" +
+                "      lastname\n" +
+                "  }\n" +
+                "}";
+        Author author = tester.document(query)
+                .execute()
+                .path("data.readAuthorByFirstname")
+                .entity(Author.class)
+                .get();
+        Assertions.assertNotNull(author);
+        Assertions.assertEquals(1, author.getId());
+        Assertions.assertEquals("Maxim", author.getFirstname());
+        Assertions.assertEquals("Dolgiy", author.getLastname());
     }
 
 }
