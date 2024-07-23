@@ -1,6 +1,7 @@
 package ru.trustworthyq.graphql.service;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.data.mongodb.core.FindAndModifyOptions.options;
 
@@ -15,6 +16,7 @@ import java.util.Objects;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class SequenceGeneratorService {
 
     @Autowired
@@ -27,6 +29,7 @@ public class SequenceGeneratorService {
 
         DBSequence counter = mongoOperations
                 .findAndModify(query, update, options().returnNew(true).upsert(true), DBSequence.class);
+        log.info("Trying to update the next id value");
         return !Objects.isNull(counter) ? counter.getSeq() : 1;
     }
 }
