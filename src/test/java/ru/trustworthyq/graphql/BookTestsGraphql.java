@@ -21,7 +21,7 @@ public class BookTestsGraphql {
 
 
     @Test
-    void readAllBooks() {
+    void readAllBooksShouldReturnListOfBooks() {
         String query = "query {\n" +
                 "  readAllBooks {\n" +
                 "    id\n" +
@@ -49,7 +49,7 @@ public class BookTestsGraphql {
         Assertions.assertNotNull(books.get(0).getAuthor().getLastname());
     }
     @Test
-    void readBookById() {
+    void readBookByIdShouldReturnBook() {
         String query = "query {\n" +
                 "  readBookById (id: 8) {\n" +
                 "    id\n" +
@@ -76,7 +76,7 @@ public class BookTestsGraphql {
         Assertions.assertEquals("Dolgiy", book.getAuthor().getLastname());
     }
     @Test
-    void readBooksByAuthorId() {
+    void readBooksByAuthorIdShouldReturnListOfBooks() {
         String query = "query {\n" +
                 "  readBooksByAuthorId (id: 1) {\n" +
                 "    id\n" +
@@ -104,7 +104,7 @@ public class BookTestsGraphql {
         Assertions.assertNotNull(books.get(0).getAuthor().getLastname());
     }
     @Test
-    void createBook() {
+    void createBookShouldReturnBook() {
         String query = "mutation {\n" +
                 "  createBook(bookDTO: {\n" +
                 "    name: \"111\",\n" +
@@ -132,7 +132,7 @@ public class BookTestsGraphql {
         Assertions.assertEquals(1, book.getAuthor().getId());
     }
     @Test
-    void updateBook() {
+    void updateBookShouldReturnBook() {
         String query = "mutation {\n" +
                 "  updateBook (bookUpdateDTO: {id: 7, name: \"999\", status: \"999\", authorId: 1}){\n" +
                 "    id\n" +
@@ -157,7 +157,7 @@ public class BookTestsGraphql {
         Assertions.assertEquals(1, book.getAuthor().getId());
     }
     @Test
-    void deleteBook() {
+    void deleteBookShouldReturnId() {
         String query = "mutation {\n" +
                 "  deleteBook (id: 5)\n" +
                 "}";

@@ -17,7 +17,7 @@ class AuthorTestsGraphql {
     private GraphQlTester tester;
 
     @Test
-    void createAuthor() {
+    void createAuthorShouldReturnAuthor() {
         String query = "mutation {\n" +
                 "  createAuthor(authorDTO: {firstname: \"111\", lastname: \"222\"}) {\n" +
                 "    id\n" +
@@ -35,7 +35,7 @@ class AuthorTestsGraphql {
         Assertions.assertEquals("222", author.getLastname());
     }
     @Test
-    void readAuthorByFirstname() {
+    void readAuthorByFirstnameShouldReturnAuthor() {
         String query = "query {\n" +
                 "  readAuthorByFirstname (firstname: \"Maxim\") {\n" +
                 "      id\n" +
